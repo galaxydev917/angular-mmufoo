@@ -1,0 +1,164 @@
+<div class="page-wrapper">
+  <div class="sub-wrapper" *ngIf="showPageName == 'signup'">
+    <h1>Sign Up</h1>
+    <form [formGroup]="signupForm" (ngSubmit)="createUser()">
+      <div class="form-input">
+        <p>Name:</p>
+        <input type="text" formControlName="username" />
+        <div
+          *ngIf="
+            signupForm.get('username')?.invalid &&
+            (signupForm.get('username')?.dirty ||
+              signupForm.get('username')?.touched)
+          "
+        >
+          <p
+            *ngIf="signupForm.get('username')?.errors?.required"
+            class="erro-msg"
+          >
+            User Name is required.
+          </p>
+          <p
+            *ngIf="signupForm.get('username')?.errors?.minlength"
+            class="erro-msg"
+          >
+            User Name's length must be at least 3.
+          </p>
+          <p
+            *ngIf="signupForm.get('username')?.errors?.maxlength"
+            class="erro-msg"
+          >
+            User Name's length must be less than 24.
+          </p>
+        </div>
+      </div>
+      <div class="form-input">
+        <p>Email:</p>
+        <input type="text" formControlName="email" />
+        <div
+          *ngIf="
+            signupForm.get('email')?.invalid &&
+            (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)
+          "
+        >
+          <p *ngIf="signupForm.get('email')?.errors?.required" class="erro-msg">
+            Email is required.
+          </p>
+          <p *ngIf="signupForm.get('email')?.errors?.email" class="erro-msg">
+            Email format is invalid.
+          </p>
+        </div>
+      </div>
+      <div class="form-input">
+        <p>Type:</p>
+        <select formControlName="type" class="type-dropdown">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+        <div
+          *ngIf="
+            signupForm.get('type')?.invalid &&
+            (signupForm.get('type')?.dirty || signupForm.get('type')?.touched)
+          "
+        >
+          <p *ngIf="signupForm.get('type')?.errors?.required" class="erro-msg">
+            Type is required.
+          </p>
+        </div>
+      </div>
+      <div class="form-input">
+        <p>Password:</p>
+        <input type="password" formControlName="password" />
+        <div
+          *ngIf="
+            signupForm.get('password')?.invalid &&
+            (signupForm.get('password')?.dirty ||
+              signupForm.get('password')?.touched)
+          "
+        >
+          <p
+            *ngIf="signupForm.get('password')?.errors?.required"
+            class="erro-msg"
+          >
+            Password is required.
+          </p>
+          <p
+            *ngIf="signupForm.get('password')?.errors?.minlength"
+            class="erro-msg"
+          >
+            Password's length must be at least 5.
+          </p>
+          <p
+            *ngIf="signupForm.get('password')?.errors?.maxlength"
+            class="erro-msg"
+          >
+            Password's length must be less than 24.
+          </p>
+          <p
+            *ngIf="signupForm.get('password')?.errors?.passwordCase"
+            class="erro-msg"
+          >
+            Password must contain at least one lower case and one upper case
+            letter
+          </p>
+          <p
+            *ngIf="signupForm.get('password')?.errors?.passwordSpecial"
+            class="erro-msg"
+          >
+            Password must have at least one special character.
+          </p>
+        </div>
+      </div>
+      <button type="submit" [disabled]="!signupForm.valid || isSubmitting">
+        Submit
+      </button>
+    </form>
+  </div>
+  <div class="sub-wrapper" *ngIf="showPageName == 'login'">
+    <h1>Sign In</h1>
+    <form [formGroup]="signinForm" (ngSubmit)="signIn()">
+      <div class="form-input">
+        <p>Email:</p>
+        <input type="text" formControlName="signinEmail" />
+        <div
+          *ngIf="
+            signinForm.get('signinEmail')?.invalid &&
+            (signinForm.get('signinEmail')?.dirty ||
+              signinForm.get('signinEmail')?.touched)
+          "
+        >
+          <p
+            *ngIf="signinForm.get('signinEmail')?.errors?.required"
+            class="erro-msg"
+          >
+            Email is required.
+          </p>
+        </div>
+      </div>
+      <div class="form-input">
+        <p>Password:</p>
+        <input type="password" formControlName="signinPassword" />
+        <div
+          *ngIf="
+            signinForm.get('signinPassword')?.invalid &&
+            (signinForm.get('signinPassword')?.dirty ||
+              signinForm.get('signinPassword')?.touched)
+          "
+        >
+          <p
+            *ngIf="signinForm.get('signinPassword')?.errors?.required"
+            class="erro-msg"
+          >
+            Password is required.
+          </p>
+        </div>
+      </div>
+      <button type="submit" [disabled]="!signinForm.valid || isSigning">
+        Submit
+      </button>
+    </form>
+  </div>
+  <button type="href" (click)="switchPage()">
+    {{ showPageName == 'login' ? 'Go to Sign Up' : 'Go to Sign In' }}
+  </button>
+</div>

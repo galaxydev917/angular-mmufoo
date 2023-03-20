@@ -1,0 +1,25 @@
+.page-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sub-wrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+p {
+  margin: unset;
+  padding: unset;
+}
+.form-input {
+  margin: 10px;
+}
+.erro-msg {
+  color: red;
+  font-size: 12px;
+}
